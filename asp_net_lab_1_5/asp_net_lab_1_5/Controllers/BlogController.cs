@@ -22,5 +22,18 @@ namespace asp_net_lab_1_5.Controllers
         {
             return View(_articles);
         }
+        public IActionResult Article(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+            var post = _articles.FirstOrDefault(p => p.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return View(post);
+        }
     }
 }
